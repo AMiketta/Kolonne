@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:backgroundTint="#2a3de7"
+    android:backgroundTintMode="screen"
+    android:background="#2a3de7"
+    android:id="@+id/driveView"
+    >
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom">
+
+        <ToggleButton
+            android:id="@+id/toggleStopAndGo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/check"
+        android:layout_margin="10dp"
+        android:textOn="@string/Fahren"
+        android:textOff="@string/Anhalten"
+            android:textColor="@color/text"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+         />
+    </LinearLayout>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/currentFrequency"
+        android:visibility="invisible" />
+
+</LinearLayout>

@@ -24,6 +24,8 @@ android {
     }
 }
 
+
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
@@ -31,4 +33,5 @@ dependencies {
     compile 'com.android.support:design:23.1.1'
     compile 'com.firebase:firebase-client-android:2.5.0+'
     compile 'com.google.android.gms:play-services-appindexing:8.1.0'
+    compile 'com.facebook.android:facebook-android-sdk:[4,5)'
 }

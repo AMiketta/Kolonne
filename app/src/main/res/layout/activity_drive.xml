@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:backgroundTint="#2a3de7"
+    android:backgroundTint="#00ff00"
     android:backgroundTintMode="screen"
     android:background="#2a3de7"
     android:id="@+id/driveView"
@@ -20,6 +20,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/check"
             android:layout_margin="10dp"
+
             android:textOn="@string/Fahren"
             android:textOff="@string/Anhalten"
             android:textColor="@color/text"

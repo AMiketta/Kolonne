@@ -4,9 +4,18 @@
     <string name="connectButtonText">Connect</string>
     <string name="createChannel">Create New!</string>
     <string name="button_start_kolonne">Start!</string>
+    <string name="RegisterButtonText">Register</string>
     <string name="Fahren">Fahren</string>
     <string name="Anhalten">Anhalten</string>
     <string name="title_activity_host">HostActivity</string>
     <string name="title_activity_drive">DriveActivity</string>
     <string name="title_activity_connect">ConnectActivity</string>
+    <string name="action_logout">Logout</string>
+    <string name="login_with_facebook">Login with Facebook</string>
+    <string name="login_with_google">Login with Google+</string>
+    <string name="login_with_twitter">Login with Twitter</string>
+    <string name="login_with_password">Login with Password</string>
+    <string name="login_anonymously">Login Anonymously</string>
+    <string name="facebook_app_id">1695123230766537</string>
+    <string name="firebase_url">https://luminous-heat-2096.firebaseio.com/</string>
 </resources>

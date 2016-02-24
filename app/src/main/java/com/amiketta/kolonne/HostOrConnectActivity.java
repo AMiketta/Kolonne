@@ -1,17 +1,27 @@
 package com.amiketta.kolonne;
 
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.pm.Signature;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.facebook.appevents.AppEventsLogger;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import static com.firebase.client.Firebase.setAndroidContext;
 
@@ -26,6 +36,22 @@ public class HostOrConnectActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Add code to print out the key hash
+        try {
+            PackageInfo info = getPackageManager().getPackageInfo(
+                    "com.amiketta.kolonne",
+                    PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+            }
+        } catch (NameNotFoundException e) {
+
+        } catch (NoSuchAlgorithmException e) {
+
+        }
 
         setAndroidContext(this);
 
@@ -43,31 +69,7 @@ public class HostOrConnectActivity extends AppCompatActivity {
 
                 HostOrConnectActivity.this.startActivity(myIntent);
 
-/*
-                setContentView(R.layout.activity_host);
 
-                EditText frequency = (EditText) findViewById(R.id.frequencyText);
-                frequency.setText("00000");
-
-                Button hostButton = (Button) findViewById(R.id.HostCannelbutton);
-                hostButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        EditText frequency = (EditText) findViewById(R.id.frequencyText);
-
-                        KolonnenChannel newchannel = new KolonnenChannel("unknown", "Frequenz");
-
-
-                        Firebase myFirebaseRef = new Firebase("https://luminous-heat-2096.firebaseio.com/");
-                        Firebase frequencyref = myFirebaseRef.child("frequencies").child(frequency.getText().toString());
-                        frequencyref.setValue(newchannel);
-
-                        String frequencyText = frequency.getText().toString();
-                        SetDriveView(frequencyText);
-                    }
-
-                });
-*/
             }
         });
 
@@ -84,11 +86,26 @@ public class HostOrConnectActivity extends AppCompatActivity {
             }
         });
 
+        Button registerButton = (Button) findViewById(R.id.RegisterButton);
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent myIntent = new Intent(HostOrConnectActivity.this, RegisterActivity.class);
+
+                HostOrConnectActivity.this.startActivity(myIntent);
+
+
+            }
+        });
+
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -150,5 +167,21 @@ public class HostOrConnectActivity extends AppCompatActivity {
         );
         AppIndex.AppIndexApi.end(client, viewAction);
         client.disconnect();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // Logs 'install' and 'app activate' App Events.
+        AppEventsLogger.activateApp(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        // Logs 'app deactivate' App Event.
+        AppEventsLogger.deactivateApp(this);
     }
 }

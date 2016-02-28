@@ -6,15 +6,20 @@ package com.amiketta.kolonne;
 public class KolonnenChannel {
     private String author;
     private String title;
+    private String password;
     private Boolean go;
+
     public KolonnenChannel() {
-        // empty default constructor, necessary for Firebase to be able to deserialize blog posts
+
     }
 
-    public KolonnenChannel(String author, String title) {
+    public KolonnenChannel(String author, String title, String password) {
         this.author = author;
         this.title = title;
+        this.password = password;
         this.go = true;
+
+
     }
 
     public String getAuthor() {
@@ -22,6 +27,14 @@ public class KolonnenChannel {
     }
     public String getTitle() {
         return title;
+    }
+
+    public Boolean hasPassword() {
+        return (this.password != null && !this.password.equals(""));
+    }
+
+    public Boolean validatePassword(String password) {
+        return this.password.equals(password);
     }
 
     // Gibt zurück ob gefahren werden kann oder ob gewartet werden soll. false falls gewartet werden soll...

@@ -35,4 +35,5 @@
         android:id="@+id/currentFrequency"
         android:visibility="invisible" />
 
+
 </LinearLayout>
